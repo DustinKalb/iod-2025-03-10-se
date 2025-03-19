@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Module 1 Exercise 3</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            margin:
+                0;
+        }
+
+        .container {
+            display: flex;
+            min-height:
+                100vh;
+            align-items: stretch;
+        }
+
+        .column {
+            background: goldenrod;
+            display:
+                flex;
+            flex-direction: column;
+            justify-content:
+                center;
+            align-items: center;
+            flex:
+                1;
+        }
+    </style>
+    <script>
+        function changeMe1() {
+            document.getElementById("heading1").innerHTML = "World";
+            document.getElementById("column1").style.backgroundColor = "red";
+        }
+        function changeMe2() {
+            document.getElementById("heading2").innerHTML = "Hello";
+            document.getElementById("column2").style.backgroundColor = "blue";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="column" id="column1">
+
+            <h1 id="heading1">Hello</h1>
+            <img src="https://www.emoji.co.uk/files/apple-emojis/smileys-people-ios/90-waving-hand-sign.png"
+                alt="waving hand" height="300" width="300">
+            <button style="color:white; background-color: black" type="button" onclick="changeMe1()">Change
+                Me</button>
+
+        </div>
+        <div class="column" id="column2">
+
+            <h1 id="heading2">World</h1>
+            <img src="https://static.vecteezy.com/system/resources/previews/001/198/026/non_2x/grid-globe-png.png"
+                alt="globe" height="300" width="300">
+            <button style="color:white; background-color:black" type="button" onclick="changeMe2()">Change</button>
+
+        </div>
+    </div>
+</body>
+
+</html>
