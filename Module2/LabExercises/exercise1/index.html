@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Lab Exercise 2.1</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Lab Exercise 2.1">
+  <meta name="keywords" content="HTML, CSS, Javascript">
+  <meta name="author" content="Dustin Kalb">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <!-- works like <a href="/index.html">Home</a> -->
+      <a href="/">Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>My HTML learning journey</h1>
+    <h2>Learning elements - div, span, p, pre, ul, li, article</h2>
+    <article>
+      <div>HTML</div>
+      <div>CSS</div>
+      <div>JavaScript</div>
+      <span>HTML</span> <span>CSS</span> <span>JavaScript</span>
+      <p>
+        p represents paragraphs without preserving spacing
+      </p>
+      <pre>
+        Text in         a pre element
+        is displayed in a fixed-width
+        font, and it preserves
+        both        spaces and
+        line breaks
+      </pre>
+      <ul>
+        <li>Kakashi</li>
+        <li>Naruto</li>
+        <li>Sasuke</li>
+        <li>Sakura</li>
+      </ul>
+      <ol>
+        <li>America</li>
+        <li>Burger</li>
+        <li>Cheese</li>
+        <ul>
+          <li>American Cheese</li>
+          <li>Pepper Jack Cheese</li>
+        </ul>
+      </ol>
+    </article>
+    <article>
+      <h2>Unique h2 tag</h2>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">First header</th>
+            <th>Second header</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>First cell - first row</td>
+            <td>Second cell - first row</td>
+            <td>Third cell</td>
+          </tr>
+          <tr>
+            <td rowspan="2">First cell - first row</td>
+            <td>Second cell - first row</td>
+            <td>Missing td</td>
+          </tr>
+          <tr>
+            <td>Third row</td>
+            <td>Third row</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+    <article>
+      <h2>Unique h2</h2>
+      <img src="https://picsum.photos/400/400" alt="Random Image" height="500" width="500">
+    </article>
+  </main>
+
+  <footer>Copyright &copy; 2024</footer>
+</body>
+
+</html>
