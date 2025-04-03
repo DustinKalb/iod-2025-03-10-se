@@ -8,8 +8,19 @@ article {
 .style-me1 {
   color: red;
 }
+#style-me2 {
+  color: blue;
+}
+.style-me1#style-me2 {
+  color: purple;
+}
 /* Put styles for questions 2.1 and 2.2 here */
-
+.my-descendants-are-styled p {
+  background-color: red;
+}
+.my-children-are-styled > p {
+  background-color: lightgreen;
+}
 /* II. Box model and common properties */
 /* Put styles for questions 1-8 here */
 
