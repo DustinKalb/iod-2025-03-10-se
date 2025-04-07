@@ -18,8 +18,8 @@ img.portrait {
 .info,
 .experience {
   vertical-align: top;
-  display: inline-block;
   flex-direction: column;
+  display: inline-block;
   box-sizing: border-box;
   padding: 15px;
   margin: 10px;
@@ -60,4 +60,20 @@ img.portrait {
 ul.Job2 {
   border-bottom: lightgray solid 1px;
   padding-bottom: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .info,
+  .experience {
+    display: block;
+  }
+  .info {
+    width: 90vw;
+  }
+  .experience {
+    width: 90vw;
+  }
+  .foot {
+    width: 87vw;
+  }
 }
