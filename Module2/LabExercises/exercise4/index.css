@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex-container {
+  display: flex;
+}
+
+img.portrait {
+  width: 10em;
+  height: 10em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
+.info,
+.experience {
+  vertical-align: top;
+  display: inline-block;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 15px;
+  margin: 10px;
+  height: 600px;
+}
+
+.info {
+  background-color: tan;
+  width: 400px;
+}
+
+.experience {
+  background-color: beige;
+  width: calc(100vw - 400px - 100px);
+}
+
+.info-header {
+  justify-content: space-between;
+}
+
+.skill {
+  justify-content: space-between;
+}
+
+.foot {
+  background-color: tan;
+  padding: 15px;
+  margin: 10px;
+  justify-content: center;
+  width: calc(100vw - 105px);
+}
+
+.foot > a {
+  text-decoration: none;
+  color: darkred;
+}
+
+ul.Job2 {
+  border-bottom: lightgray solid 1px;
+  padding-bottom: 20px;
+}
