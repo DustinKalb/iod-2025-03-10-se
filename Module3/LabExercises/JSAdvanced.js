@@ -90,7 +90,7 @@ function printFibonacciTimeouts(delay, limit, start) {
   );
 }
 
-//printFibonacciTimeouts(2000, 10, 1);
+printFibonacciTimeouts(2000, 10, 1);
 
 // 5. "If a function relies on context (this) and is passed as a reference
 // instead of being called directly, its context is lost.
@@ -228,3 +228,26 @@ try {
 } catch (error) {
   console.log("caught an error: " + error.message);
 }
+
+// 9.
+function randomDelay() {
+  return new Promise((resolve, reject) => {
+    const delay = Math.floor(Math.random() * 20 + 1);
+    const ms = delay * 1000;
+    setTimeout(() => {
+      if (delay % 2 === 0) {
+        resolve(delay);
+      } else {
+        reject(delay);
+      }
+    }, ms);
+  });
+}
+
+randomDelay()
+  .then((delay) => console.log(`Delay succeeded after ${delay} seconds passed`))
+  .catch((delay) =>
+    console.error(`Delay failed after ${delay} seconds passed`)
+  );
+
+// 10.
