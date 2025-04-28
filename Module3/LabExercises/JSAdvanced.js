@@ -112,21 +112,24 @@ const boundCar = carClone.description.bind(car); //works
 
 setTimeout(boundCar, 200);
 
-// 6. I had a great deal of trouble with this one. Every time I would run it,
-// I would be met with "multiply.delay" is not a function and it would stop.
-// Since, I can't solve it I will skip it for now and if a TA would like to
-// get back to me and help me solve it I would love that. :)
-//Function.prototype.delay = function (ms) {
-//  setTimeout(this, ms);
-//};
+// 6.
 
-//function multiply(a, b) {
-//  console.log(a * b);
-//}
+Function.prototype.delay = function (ms) {
+  const originalFunction = this;
+  return function (...args) {
+    setTimeout(() => {
+      originalFunction.apply(this, args);
+    }, ms);
+  };
+};
 
-//multiply.delay(500)(5, 5); // prints 25 after 500 milliseconds
+function multiply(a, b, c, d) {
+  console.log(a * b * c * d);
+}
 
-/* 7.
+multiply.delay(500)(5, 5, 2, 2); // prints 25 after 500 milliseconds
+
+// 7.
 class DigitalClock {
   constructor(prefix) {
     this.prefix = prefix;
@@ -197,7 +200,7 @@ class AlarmClock extends DigitalClock {
 
 const myAlarm = new AlarmClock();
 myAlarm.alarmOn();
-*/
+
 // 8.
 function orderItems(...itemNames) {
   return `Order placed for: ${itemNames.join(", ")}`;
@@ -251,3 +254,51 @@ randomDelay()
   );
 
 // 10.
+// run 'npm init' and accept all the defaults
+// run 'npm install node-fetch'
+// run 'npm pkg set type=module'
+
+import fetch from "node-fetch";
+globalThis.fetch = fetch;
+
+function fetchURLDataOriginal(url) {
+  let fetchPromise = fetch(url).then((response) => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+  });
+  return fetchPromise;
+}
+
+async function fetchURLData(url) {
+  const response = await fetch(url);
+
+  if (response.status === 200) {
+    const data = await response.json();
+    return data;
+  } else {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+}
+
+console.log("Testing valid URL with Original Function:");
+fetchURLDataOriginal("https://jsonplaceholder.typicode.com/todos/1")
+  .then((data) => console.log("Original Success:", data))
+  .catch((error) => console.error("Original Error:", error.message));
+
+console.log("Testing valid URL with Async Function:");
+fetchURLData("https://jsonplaceholder.typicode.com/todos/1")
+  .then((data) => console.log("Async Success:", data))
+  .catch((error) => console.error("Async Error:", error.message));
+
+console.log("Testing INVALID URL with Original Function:");
+fetchURLDataOriginal("https://jsonplaceholder.typicode.com/invalid-url")
+  .then((data) => console.log("Original Success:", data))
+  .catch((error) => console.error("Original Error:", error.message));
+
+console.log("Testing INVALID URL with Async Function:");
+fetchURLData("https://jsonplaceholder.typicode.com/invalid-url")
+  .then((data) => console.log("Async Success:", data))
+  .catch((error) => console.error("Async Error:", error.message));
