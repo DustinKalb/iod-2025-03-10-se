@@ -1,0 +1,170 @@
+// 1.
+function makeCounter(start) {
+  let currentCount = start;
+  return function incrementBy(increment) {
+    currentCount = currentCount + increment;
+    console.log(currentCount);
+    return currentCount;
+  };
+}
+
+let counter1 = makeCounter(0);
+let counter2 = makeCounter(1);
+
+counter1(2); // 1
+counter1(2); // 2
+counter2(4);
+counter2(4);
+
+// 2.
+// 2a. The four tests below will print in the opposite order from which they are typed.
+//     They do this because of their individually set delays.
+delayMsg = (msg) => {
+  console.log(`This message will be printed after a delay: ${msg}`);
+};
+
+setTimeout(delayMsg, 100, "#1: Delayed by 100ms");
+setTimeout(delayMsg, 20, "#2: Delayed by 20ms");
+setTimeout(delayMsg, 0, "#3: Delayed by 0ms");
+delayMsg("#4: Not delayed at all");
+let cancelledTimerId = setTimeout(delayMsg, 10000, "#5: Delayed by 10s");
+clearTimeout(cancelledTimerId);
+
+// 3.
+function debounce(func, ms) {
+  let timeoutId;
+  return function cancelTimeout() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this);
+    }, ms);
+  };
+}
+
+function printMe2(msg) {
+  console.log(msg);
+}
+const printMe = debounce(() => printMe2("hello"), 3000); //create this debounce function for a)
+//fire off 3 calls to printMe within 300ms - only the LAST one should print, after 1000ms of no calls
+
+setTimeout(printMe, 100);
+setTimeout(printMe, 200);
+setTimeout(printMe, 300);
+
+// 4.
+function printFibonacci(start, limit) {
+  let counter = 1;
+  let olderNum = 0;
+  let oldNum = 0;
+  return function addNum() {
+    counter++;
+    if (counter == limit) clearInterval(tickId);
+    result = start + olderNum + oldNum;
+    olderNum = oldNum;
+    oldNum = result;
+    console.log(result);
+    start = 0;
+    return result;
+  };
+}
+
+//let fibonacci = printFibonacci(1, 10);
+
+//let tickId = setInterval(() => fibonacci(), 1000);
+
+function printFibonacciTimeouts(delay, limit, start) {
+  let counter = 1;
+  let olderNum = 0;
+  let oldNum = 0;
+  setTimeout(
+    function addNum(current) {
+      result = start + olderNum + oldNum;
+      olderNum = oldNum;
+      oldNum = result;
+      console.log(result);
+      start = 0;
+      if (current < limit) setTimeout(addNum, delay, current + 1);
+    },
+    delay,
+    counter
+  );
+}
+
+//printFibonacciTimeouts(2000, 10, 1);
+
+// 5. "If a function relies on context (this) and is passed as a reference
+// instead of being called directly, its context is lost.
+// 5c. It uses the new value, as long as I change the call to "carClone".
+// 5e. It does not use the new value, instead it uses the original.
+let car = {
+  make: "Porsche",
+  model: "911",
+  year: 1964,
+
+  description() {
+    console.log(`This car is a ${this.make} ${this.model} from ${this.year}`);
+  },
+};
+
+const carClone = { ...car, year: 9999, model: "999" };
+
+const boundCar = carClone.description.bind(car); //works
+
+setTimeout(boundCar, 200);
+
+// 6. I had a great deal of trouble with this one. Every time I would run it,
+// I would be met with "multiply.delay" is not a function and it would stop.
+// Since, I can't solve it I will skip it for now and if a TA would like to
+// get back to me and help me solve it I would love that. :)
+//Function.prototype.delay = function (ms) {
+//  setTimeout(this, ms);
+//};
+
+//function multiply(a, b) {
+//  console.log(a * b);
+//}
+
+//multiply.delay(500)(5, 5); // prints 25 after 500 milliseconds
+
+// 7.
+class DigitalClock {
+  constructor(prefix) {
+    this.prefix = prefix;
+  }
+
+  display() {
+    let date = new Date();
+    //create 3 variables in one go using array destructuring
+    let [hours, mins, secs] = [
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+    ];
+
+    if (hours < 10) hours = "0" + hours;
+    if (mins < 10) mins = "0" + mins;
+    if (secs < 10) secs = "0" + secs;
+
+    console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
+  }
+
+  stop() {
+    clearInterval(this.timer);
+  }
+
+  start() {
+    this.display();
+    this.timer = setInterval(() => this.display(), 1000);
+  }
+}
+
+const myClock = new DigitalClock("my clock:");
+myClock.start();
+
+class PrecisionClock extends DigitalClock {
+  precision = 1;
+}
+
+class AlarmClock extends DigitalClock {
+  wakeupTime = "22:16";
+}
