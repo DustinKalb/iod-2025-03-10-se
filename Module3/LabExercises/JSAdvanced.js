@@ -126,7 +126,7 @@ setTimeout(boundCar, 200);
 
 //multiply.delay(500)(5, 5); // prints 25 after 500 milliseconds
 
-// 7.
+/* 7.
 class DigitalClock {
   constructor(prefix) {
     this.prefix = prefix;
@@ -197,5 +197,34 @@ class AlarmClock extends DigitalClock {
 
 const myAlarm = new AlarmClock();
 myAlarm.alarmOn();
-
+*/
 // 8.
+function orderItems(...itemNames) {
+  return `Order placed for: ${itemNames.join(", ")}`;
+}
+
+function validateStringArg(func) {
+  return function (...args) {
+    for (let arg of args) {
+      if (typeof arg !== "string") {
+        throw new Error("Not a string!");
+      }
+    }
+    return func(...args);
+  };
+}
+
+// create a decorated version of the original function
+const validatedOrderItem = validateStringArg(orderItems);
+
+try {
+  console.log(validatedOrderItem("Apple Watch", "iPhone", "MacBook"));
+} catch (error) {
+  console.log("caught an error: " + error.message);
+}
+
+try {
+  console.log(validatedOrderItem("iPad", 123));
+} catch (error) {
+  console.log("caught an error: " + error.message);
+}
