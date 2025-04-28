@@ -165,6 +165,37 @@ class PrecisionClock extends DigitalClock {
   precision = 1;
 }
 
+// ALARM CLOCK
+
 class AlarmClock extends DigitalClock {
-  wakeupTime = "22:16";
+  alarm() {
+    let alarm = "07:00";
+    let date = new Date();
+    let [hours, mins] = [date.getHours(), date.getMinutes()];
+
+    if (hours < 10) hours = "0" + hours;
+    if (mins < 10) mins = "0" + mins;
+    let time = `${hours}:${mins}`;
+    if (time === alarm) {
+      this.beep();
+    }
+  }
+
+  beep() {
+    clearInterval(this.alarmTimer);
+    clearInterval(myClock.timer);
+    this.alarmTimer = null;
+    myClock.timer = null;
+    console.log("Wake Up");
+  }
+
+  alarmOn() {
+    this.alarm();
+    this.alarmTimer = setInterval(() => this.alarm(), 1000);
+  }
 }
+
+const myAlarm = new AlarmClock();
+myAlarm.alarmOn();
+
+// 8.
