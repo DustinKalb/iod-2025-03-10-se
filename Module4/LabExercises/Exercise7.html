@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            animation: moveAndColor 4s infinite alternate;
+        }
+
+        @keyframes moveAndColor {
+            0% {
+                top: 0;
+                background-color: red;
+            }
+
+            100% {
+                top: calc(100vh - 100px);
+                background-color: blue;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="square"></div>
+</body>
