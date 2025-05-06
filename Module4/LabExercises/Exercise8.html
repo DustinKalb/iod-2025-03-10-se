@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Date Comparison</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.5.0/build/global/luxon.min.js"></script>
+    <div class="container">
+        <h1>Date Comparison Tool</h1>
+        <p>Select two dates to compare:</p>
+
+        <!-- Date Inputs -->
+        <label for="date1">First Date:</label>
+        <input type="date" id="date1">
+        <br><br>
+        <label for="date2">Second Date:</label>
+        <input type="date" id="date2">
+        <br><br>
+        <button onclick="compareDates()">Compare Dates</button>
+
+        <!-- Results -->
+        <h2>Results:</h2>
+        <p id="closest-date"></p>
+        <p id="date-order"></p>
+        <p id="london-time"></p>
+    </div>
+
+    <script>
+        const { DateTime } = luxon;
+
+        function compareDates() {
+            // Get the selected dates
+            const date1Input = document.getElementById("date1").value;
+            const date2Input = document.getElementById("date2").value;
+
+            // Ensure both dates are selected
+            if (!date1Input || !date2Input) {
+                alert("Please select both dates.");
+                return;
+            }
+
+            // Convert inputs to Luxon DateTime objects
+            const date1 = DateTime.fromISO(date1Input);
+            const date2 = DateTime.fromISO(date2Input);
+            const currentDate = DateTime.now();
+
+            // Determine the date closest to the current date
+            const diff1 = Math.abs(currentDate.diff(date1, "days").days);
+            const diff2 = Math.abs(currentDate.diff(date2, "days").days);
+            const closestDate = diff1 < diff2 ? date1 : date2;
+
+            // Determine if the first date is before or after the second date
+            const dateOrder = date1 < date2 ? "The first date is before the second date." : "The first date is after the second date.";
+
+            // Get the current time in London
+            const londonTime = currentDate.setZone("Europe/London").toLocaleString(DateTime.TIME_WITH_SECONDS);
+
+            // Display the results
+            document.getElementById("closest-date").innerText = `The date closest to today is: ${closestDate.toLocaleString(DateTime.DATE_FULL)}`;
+            document.getElementById("date-order").innerText = dateOrder;
+            document.getElementById("london-time").innerText = `The current time in London is: ${londonTime}`;
+        }
+    </script>
+</body>
