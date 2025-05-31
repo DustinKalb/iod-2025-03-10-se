@@ -1,0 +1,16 @@
+{
+  "name": "exercise1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"node server1.js\" \"node server2.js\" \"node server3.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "node": "^22.16.0"
+  }
+}
