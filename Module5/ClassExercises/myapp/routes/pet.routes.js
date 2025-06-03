@@ -3,7 +3,7 @@ const router = express.Router();
 
 // GET pet-api/pets
 router.get("/pets", (req, res) => {
-  res.send("Hello World, This is my Pet Route!");
+  res.send("Hello World, This is my Pet New Route!");
 });
 
 module.exports = router;
