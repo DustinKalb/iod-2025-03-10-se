@@ -1,0 +1,38 @@
+<html lang="en">
+
+<head>
+    <title>Calculator Example</title>
+</head>
+
+<body>
+    <div>Choose a number:
+        <input type="number" id="num1">
+    </div>
+    <div>Choose another number:
+        <input type="number" id="num2">
+    </div>
+    <div>Choose an operation:
+        <button onclick="calculate('add')">+</button>
+        <button onclick="calculate('subtract')">-</button>
+        <button onclick="calculate('multiply')">*</button>
+        <button onclick="calculate('divide')">/</button>
+    </div>
+    <div>Result:
+        <span id="result"></span>
+    </div>
+</body>
+
+<script>
+    function calculate(operation) {
+        const num1 = document.getElementById('num1').value;
+        const num2 = document.getElementById('num2').value;
+        fetch(`/calculator/${operation}?num1=${num1}&num2=${num2}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText =
+                    data.result;
+            })
+    }
+</script>
+
+</html>
