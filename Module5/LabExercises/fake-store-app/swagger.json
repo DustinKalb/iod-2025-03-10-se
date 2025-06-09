@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Fake Store App",
+    "description": "API for retrieving fake store products",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Products",
+      "description": "Product operations"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/products": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get all products",
+        "description": "Returns a list of all products from the fake store",
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "integer" },
+                  "title": { "type": "string" },
+                  "price": { "type": "number" },
+                  "description": { "type": "string" },
+                  "category": { "type": "string" },
+                  "image": { "type": "string" }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to fetch products"
+          }
+        }
+      }
+    }
+  }
+}
