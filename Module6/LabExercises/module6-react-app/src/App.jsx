@@ -5,6 +5,7 @@ import "./App.css";
 import Greeting from "./components/Greeting.jsx";
 import BigCats from "./components/BigCats.jsx";
 import ChangeMood from "./components/Emoji.jsx";
+import Calculator from "./components/Calculator.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,6 +35,7 @@ function App() {
       </p>
       <BigCats />
       <ChangeMood />
+      <Calculator />
     </>
   );
 }
