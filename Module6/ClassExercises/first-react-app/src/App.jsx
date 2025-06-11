@@ -5,6 +5,7 @@ import "./App.css";
 import MoviesList from "./components/MoviesList.jsx";
 import MoodChanger from "./components/MoodChanger.jsx";
 import BirthdayTranslator from "./components/BirthdayTranslator.jsx";
+import LoginForm from "./components/LoginForm.jsx";
 
 function ExampleComponent() {
   return (
@@ -44,6 +45,7 @@ function App() {
       <MoviesList />
       <MoodChanger />
       <BirthdayTranslator />
+      <LoginForm />
     </>
   );
 }

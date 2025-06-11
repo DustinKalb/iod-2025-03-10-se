@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import AddCatForm from "./AddCatForm";
 
 function BigCats() {
   const cats = [
@@ -52,37 +53,57 @@ function BigCats() {
     },
   ];
 
+  // Store the initial cats in a ref so it doesn't change on re-render
+  const initialCats = useRef(cats);
+
   const [currentCats, setCats] = useState(cats);
 
   const catItems = currentCats.map((cat) => (
     <SingleCat
       key={cat.id}
+      id={cat.id}
       name={cat.name}
       latinName={cat.latinName}
       image={cat.image}
+      onDelete={handleDeleteCat}
     />
   ));
 
-  const handleSortCats = () => {
+  function handleSortCats() {
     let newCats = [...currentCats];
     newCats.sort((a, b) => a.name.localeCompare(b.name));
     setCats(newCats);
-  };
+  }
 
-  const handleReverseCats = () => {
+  function handleReverseCats() {
     let newCats = [...currentCats];
     newCats.reverse();
     setCats(newCats);
-  };
+  }
 
-  const handleFilterPanthera = () => {
-    const filtered = cats.filter((cat) => cat.latinName.startsWith("Panthera"));
+  function handleFilterPanthera() {
+    const filtered = initialCats.current.filter((cat) =>
+      cat.latinName.startsWith("Panthera")
+    );
     setCats(filtered);
-  };
+  }
 
-  const handleReset = () => {
-    setCats(cats);
-  };
+  function handleReset() {
+    setCats(initialCats.current);
+  }
+
+  function handleAddCat(newCat) {
+    newCat.id = currentCats.length + 1;
+    setCats([...currentCats, newCat]);
+    // Also add to initialCats so reset includes new cats
+    initialCats.current = [...currentCats, newCat];
+  }
+
+  function handleDeleteCat(id) {
+    const updatedCats = currentCats.filter((cat) => cat.id !== id);
+    setCats(updatedCats);
+    initialCats.current = initialCats.current.filter((cat) => cat.id !== id);
+  }
 
   return (
     <div className="BigCats">
@@ -91,11 +112,12 @@ function BigCats() {
       <button onClick={handleReverseCats}>Reverse List</button>
       <button onClick={handleFilterPanthera}>Show Panthera Family</button>
       <button onClick={handleReset}>Show All</button>
+      <AddCatForm onAddCat={handleAddCat} />
     </div>
   );
 }
 
-function SingleCat({ name, latinName, image }) {
+function SingleCat({ id, name, latinName, image, onDelete }) {
   return (
     <li>
       <h3 style={{ textDecoration: "underline" }}>{name}</h3>
@@ -103,6 +125,15 @@ function SingleCat({ name, latinName, image }) {
       <div>
         <img src={image} alt={name} width={250} height={180} />
       </div>
+      <a
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          onDelete(id);
+        }}
+      >
+        Delete
+      </a>
     </li>
   );
 }
