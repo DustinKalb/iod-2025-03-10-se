@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Greeting from "./components/Greeting.jsx";
 import BigCats from "./components/BigCats.jsx";
+import ChangeMood from "./components/Emoji.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,6 +33,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <BigCats />
+      <ChangeMood />
     </>
   );
 }

@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import MoviesList from "./components/MoviesList.jsx";
+import MoodChanger from "./components/MoodChanger.jsx";
 
 function ExampleComponent() {
   return (
@@ -15,6 +16,7 @@ function ExampleComponent() {
 
 function App() {
   const [count, setCount] = useState(0);
+  const [mood, setMood] = useState("happy");
 
   return (
     <>
@@ -40,6 +42,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <MoviesList />
+      <MoodChanger />
     </>
   );
 }
