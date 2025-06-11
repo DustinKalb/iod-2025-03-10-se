@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function BigCats() {
   const cats = [
     {
@@ -50,7 +52,9 @@ function BigCats() {
     },
   ];
 
-  const catItems = cats.map((cat) => (
+  const [currentCats, setCats] = useState(cats);
+
+  const catItems = currentCats.map((cat) => (
     <SingleCat
       key={cat.id}
       name={cat.name}
@@ -59,9 +63,34 @@ function BigCats() {
     />
   ));
 
+  const handleSortCats = () => {
+    let newCats = [...currentCats];
+    newCats.sort((a, b) => a.name.localeCompare(b.name));
+    setCats(newCats);
+  };
+
+  const handleReverseCats = () => {
+    let newCats = [...currentCats];
+    newCats.reverse();
+    setCats(newCats);
+  };
+
+  const handleFilterPanthera = () => {
+    const filtered = cats.filter((cat) => cat.latinName.startsWith("Panthera"));
+    setCats(filtered);
+  };
+
+  const handleReset = () => {
+    setCats(cats);
+  };
+
   return (
     <div className="BigCats">
       <ul style={{ listStyle: "none" }}>{catItems}</ul>
+      <button onClick={handleSortCats}>Sort List</button>
+      <button onClick={handleReverseCats}>Reverse List</button>
+      <button onClick={handleFilterPanthera}>Show Panthera Family</button>
+      <button onClick={handleReset}>Show All</button>
     </div>
   );
 }

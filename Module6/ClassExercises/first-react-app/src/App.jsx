@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import MoviesList from "./components/MoviesList.jsx";
 import MoodChanger from "./components/MoodChanger.jsx";
+import BirthdayTranslator from "./components/BirthdayTranslator.jsx";
 
 function ExampleComponent() {
   return (
@@ -16,7 +17,6 @@ function ExampleComponent() {
 
 function App() {
   const [count, setCount] = useState(0);
-  const [mood, setMood] = useState("happy");
 
   return (
     <>
@@ -43,6 +43,7 @@ function App() {
       </p>
       <MoviesList />
       <MoodChanger />
+      <BirthdayTranslator />
     </>
   );
 }

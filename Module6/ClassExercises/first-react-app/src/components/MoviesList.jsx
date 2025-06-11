@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function MoviesList() {
   // collection of objects representing movies
   const movies = [
@@ -21,7 +23,9 @@ function MoviesList() {
     },
   ];
 
-  const movieItems = movies.map((movie) => (
+  const [currentMovies, setCurrentMovies] = useState(movies);
+
+  const movieItems = currentMovies.map((movie) => (
     <Movie
       key={movie.id}
       title={movie.title}
@@ -30,9 +34,16 @@ function MoviesList() {
     />
   ));
 
+  const handleReverseMovies = () => {
+    let newMovies = [...currentMovies];
+    newMovies.reverse();
+    setCurrentMovies(newMovies);
+  };
+
   return (
     <div className="MoviesList">
       <ul>{movieItems}</ul>
+      <button onClick={handleReverseMovies}>Reverse List</button>
     </div>
   );
 }
