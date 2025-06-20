@@ -1,27 +1,17 @@
 import { useState, useEffect } from "react";
+import { useData } from "../hooks/useData";
 
 const currencies = ["USD", "AUD", "NZD", "GBP", "EUR", "SGD"];
 
 function BitcoinRates() {
   const [currency, setCurrency] = useState(currencies[0]);
-  const [price, setPrice] = useState(null);
 
-  useEffect(() => {
-    console.log("running effect");
-    let ignore = false;
-    fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=" +
-        currency
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        if (!ignore) setPrice(json.bitcoin[currency.toLowerCase()]);
-      });
-    return () => {
-      ignore = true;
-      console.log("cleanup effect");
-    };
-  }, [currency]);
+  const data = useData(
+    "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=" +
+      currency
+  );
+
+  const price = data ? data.bitcoin[currency.toLowerCase()] : "not found";
 
   const options = currencies.map((curr) => (
     <option value={curr} key={curr}>

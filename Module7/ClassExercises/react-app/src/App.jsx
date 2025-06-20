@@ -4,6 +4,11 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import ClockDisplay from "./components/ClockDisplay.jsx";
 import ActivityFinder from "./components/ActivityFinder.jsx";
+import RefCounter from "./components/RefCounter.jsx";
+import VideoPlayer from "./components/VideoPlayer.jsx";
+import ReducerCounter from "./components/ReducerCounter.jsx";
+import PostListReducer from "./components/PostListReducer.jsx";
+import SubscribeForm from "./components/SubscribeForm.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,6 +37,11 @@ function App() {
       </p>
       <ClockDisplay />
       <ActivityFinder />
+      <RefCounter />
+      <VideoPlayer />
+      <ReducerCounter />
+      <PostListReducer />
+      <SubscribeForm />
     </>
   );
 }
