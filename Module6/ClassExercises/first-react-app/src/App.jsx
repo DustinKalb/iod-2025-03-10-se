@@ -6,6 +6,8 @@ import MoviesList from "./components/MoviesList.jsx";
 import MoodChanger from "./components/MoodChanger.jsx";
 import BirthdayTranslator from "./components/BirthdayTranslator.jsx";
 import LoginForm from "./components/LoginForm.jsx";
+import { UserProvider } from "./context/UserContext.jsx";
+import MyThemeProvider from "./context/MyThemeContext.jsx";
 
 function ExampleComponent() {
   return (
@@ -42,10 +44,14 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <MoviesList />
-      <MoodChanger />
-      <BirthdayTranslator />
-      <LoginForm />
+      <UserProvider>
+        <MyThemeProvider>
+          <MoviesList />
+          <MoodChanger />
+          <BirthdayTranslator />
+          <LoginForm />
+        </MyThemeProvider>
+      </UserProvider>
     </>
   );
 }
