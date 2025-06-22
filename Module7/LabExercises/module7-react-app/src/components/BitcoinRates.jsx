@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useData } from "../hooks/useData";
+import { useEmojiContext } from "../context/EmojiContext";
 
 const currencies = ["USD", "AUD", "NZD", "GBP", "EUR", "SGD"];
 
 function BitcoinRates() {
   const [currency, setCurrency] = useState(currencies[0]);
-
   const data = useData(
     "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=" +
       currency
   );
-
   const price = data ? data.bitcoin[currency.toLowerCase()] : "not found";
+
+  // Use the emoji context
+  const { emoji, toggleEmoji } = useEmojiContext();
 
   const options = currencies.map((curr) => (
     <option value={curr} key={curr}>
@@ -32,6 +34,8 @@ function BitcoinRates() {
         <strong>Current Price: </strong>
         {price}
       </div>
+      <button onClick={toggleEmoji}>Change Emoji</button>
+      <span>{emoji}</span>
     </div>
   );
 }
