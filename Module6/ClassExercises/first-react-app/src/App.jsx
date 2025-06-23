@@ -8,6 +8,8 @@ import BirthdayTranslator from "./components/BirthdayTranslator.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
 import MyThemeProvider from "./context/MyThemeContext.jsx";
+import AppRoutes from "./routes/AppRoutes.jsx";
+import NavBar from "./components/NavBar.jsx";
 
 function ExampleComponent() {
   return (
@@ -50,6 +52,8 @@ function App() {
           <MoodChanger />
           <BirthdayTranslator />
           <LoginForm />
+          <NavBar />
+          <AppRoutes />
         </MyThemeProvider>
       </UserProvider>
     </>
