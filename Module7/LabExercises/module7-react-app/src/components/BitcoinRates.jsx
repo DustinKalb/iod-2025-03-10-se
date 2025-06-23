@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useData } from "../hooks/useData";
 import { useEmojiContext } from "../context/EmojiContext";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 
 const currencies = ["USD", "AUD", "NZD", "GBP", "EUR", "SGD"];
 
@@ -27,18 +32,50 @@ function BitcoinRates() {
   return (
     <div className="BitcoinRates componentBox">
       <h3>Bitcoin Exchange Rate</h3>
-      <label>
-        Choose currency:
-        <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
-          {options}
-        </select>
-      </label>
+      <FormControl sx={{ mb: 2, width: "10em" }}>
+        <InputLabel
+          id="currency-select-label"
+          sx={{
+            color: "white",
+            "&.Mui-focused": {
+              color: "white",
+            },
+          }}
+        >
+          Currency
+        </InputLabel>
+        <Select
+          sx={{
+            color: "white",
+            ".MuiSvgIcon-root": { color: "white" },
+            ".MuiSelect-icon": { color: "white" },
+            ".MuiOutlinedInput-notchedOutline": { borderColor: "white" },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: "white",
+            },
+          }}
+          labelId="currency-select-label"
+          id="currency-select"
+          value={currency}
+          label="Currency"
+          onChange={(e) => setCurrency(e.target.value)}
+        >
+          {currencies.map((curr) => (
+            <MenuItem value={curr} key={curr}>
+              {curr}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <div>
         <strong>Current Price: </strong>
         {price}
       </div>
-      <button onClick={toggleEmoji}>Change Emoji</button>
-      <span>{emoji}</span>
+      <br />
+      <Button variant="contained" onClick={toggleEmoji}>
+        Change Emoji
+      </Button>
+      <div>{emoji}</div>
     </div>
   );
 }

@@ -1,5 +1,8 @@
 import { useState, useContext } from "react";
 import { useUserContext } from "../context/UserContext";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 function LoginForm() {
   const [userEmail, setUserEmail] = useState("");
@@ -31,33 +34,49 @@ function LoginForm() {
     );
 
   return (
-    <div className="LoginForm componentBox">
-      <div className="formRow">
-        <label>
-          Email Address:
-          <input
-            type="email"
-            value={userEmail}
-            name="userEmail"
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-        </label>
-      </div>
-      <div className="formRow">
-        <label>
-          Password:
-          <input
-            type="password"
-            value={userPassword}
-            name="password"
-            onChange={(e) => setUserPassword(e.target.value)}
-          />
-        </label>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <button>Log In</button>
-      </form>
-    </div>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        width: 300,
+        mx: "auto",
+      }}
+    >
+      <TextField
+        variant="standard"
+        label="Email Address"
+        type="email"
+        value={userEmail}
+        onChange={(e) => setUserEmail(e.target.value)}
+        required
+        sx={{
+          input: { color: "white" },
+          label: { color: "white" },
+          "& .MuiInput-underline:before": { borderBottomColor: "white" },
+          "& .MuiInput-underline:after": { borderBottomColor: "white" },
+        }}
+      />
+      <TextField
+        variant="standard"
+        label="Password"
+        type="password"
+        value={userPassword}
+        onChange={(e) => setUserPassword(e.target.value)}
+        required
+        sx={{
+          input: { color: "white" },
+          label: { color: "white" },
+          "& .MuiInput-underline:before": { borderBottomColor: "white" },
+          "& .MuiInput-underline:after": { borderBottomColor: "white" },
+        }}
+      />
+      <Button type="submit" variant="contained">
+        Log In
+      </Button>
+    </Box>
   );
 }
 

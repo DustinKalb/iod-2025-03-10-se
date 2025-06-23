@@ -9,6 +9,7 @@ import VideoPlayer from "./components/VideoPlayer.jsx";
 import ReducerCounter from "./components/ReducerCounter.jsx";
 import PostListReducer from "./components/PostListReducer.jsx";
 import SubscribeForm from "./components/SubscribeForm.jsx";
+import CustomCard from "./components/CustomCard.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -42,6 +43,7 @@ function App() {
       <ReducerCounter />
       <PostListReducer />
       <SubscribeForm />
+      <CustomCard />
     </>
   );
 }
