@@ -1,3 +1,5 @@
+import React, { useState, useContext } from "react";
+
 // 1. Create the context
 const UserContext = React.createContext();
 
@@ -6,6 +8,7 @@ const UserContext = React.createContext();
 export const UserProvider = (props) => {
   // store the current user in state at the top level
   const [currentUser, setCurrentUser] = useState({});
+
   // sets user object in state, shared via context
   const handleUpdateUser = (user) => {
     setCurrentUser(user);

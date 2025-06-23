@@ -10,7 +10,10 @@ function BitcoinRates() {
     "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=" +
       currency
   );
-  const price = data ? data.bitcoin[currency.toLowerCase()] : "not found";
+  let price = "Loading...";
+  if (data && data.bitcoin) {
+    price = data ? data.bitcoin[currency.toLowerCase()] : "not found";
+  }
 
   // Use the emoji context
   const { emoji, toggleEmoji } = useEmojiContext();
