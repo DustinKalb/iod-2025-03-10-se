@@ -1,8 +1,8 @@
 "use strict";
 let Models = require("../models");
 
-const getComments = (res) => {
-  Models.Comment.find({})
+const getReactions = (res) => {
+  Models.Reaction.find({})
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
@@ -10,9 +10,9 @@ const getComments = (res) => {
     });
 };
 
-const createComment = (data, res) => {
+const createReaction = (data, res) => {
   console.log(data);
-  new Models.Comment(data)
+  new Models.Reaction(data)
     .save()
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
@@ -21,9 +21,9 @@ const createComment = (data, res) => {
     });
 };
 
-const updateComment = (req, res) => {
+const updateReaction = (req, res) => {
   console.log(req.body);
-  Models.Comment.findByIdAndUpdate(req.params.id, req.body, {
+  Models.Reaction.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   })
     .then((data) => res.send({ result: 200, data: data }))
@@ -33,8 +33,8 @@ const updateComment = (req, res) => {
     });
 };
 
-const deleteComment = (req, res) => {
-  Models.Comment.findByIdAndDelete(req.params.id)
+const deleteReaction = (req, res) => {
+  Models.Reaction.findByIdAndDelete(req.params.id)
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
@@ -42,8 +42,8 @@ const deleteComment = (req, res) => {
     });
 };
 
-const getUserComments = (req, res) => {
-  Models.Comment.find({ userId: req.params.uid })
+const getUserReactions = (req, res) => {
+  Models.Reaction.find({ userId: req.params.uid })
     .populate({ path: "userId" })
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
@@ -52,8 +52,8 @@ const getUserComments = (req, res) => {
     });
 };
 
-const getPostComments = (req, res) => {
-  Models.Comment.find({ postId: req.params.pid })
+const getPostReactions = (req, res) => {
+  Models.Reaction.find({ postId: req.params.pid })
     .populate({ path: "postId" })
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
@@ -62,11 +62,22 @@ const getPostComments = (req, res) => {
     });
 };
 
+const getCommentReactions = (req, res) => {
+  Models.Reaction.find({ commentId: req.params.cid })
+    .populate({ path: "commentId" })
+    .then((data) => res.send({ result: 200, data: data }))
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
 module.exports = {
-  getComments,
-  createComment,
-  updateComment,
-  deleteComment,
-  getUserComments,
-  getPostComments,
+  getReactions,
+  createReaction,
+  updateReaction,
+  deleteReaction,
+  getUserReactions,
+  getPostReactions,
+  getCommentReactions,
 };
