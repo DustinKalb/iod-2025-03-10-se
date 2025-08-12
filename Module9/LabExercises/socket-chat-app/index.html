@@ -74,6 +74,7 @@ initial-scale=1.0">
     <script src="/socket.io/socket.io.js"></script>
     <script>
         let socket = io();
+        let nickname = prompt("Enter your nickname:") || "Anonymous";;
 
         let form = document.getElementById("form");
         let input = document.getElementById("input");
@@ -82,14 +83,18 @@ initial-scale=1.0">
         form.addEventListener("submit", function (e) {
             e.preventDefault();
             if (input.value) {
-                socket.emit("chat message", input.value);
+                socket.emit("chat message", { nickname, msg: input.value });
                 input.value = "";
             }
         });
 
-        socket.on("chat message", function (msg) {
+        socket.on("chat message", function (data) {
             let item = document.createElement("li");
-            item.textContent = msg;
+            if (typeof data === "string") {
+                item.textContent = data; // system messages
+            } else {
+                item.textContent = `${data.nickname}: ${data.msg}`;
+            }
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
         });
